@@ -1,3 +1,26 @@
+# Wine Quality Analysis — Series 2 (Week 2)
+
+[![CI Workflow](https://github.com/gulnargasimzada/Wine-quality-analysis/actions/workflows/ci.yml/badge.svg)](https://github.com/gulnargasimzada/Wine-quality-analysis/actions/workflows/ci.yml)
+
+## CI/CD Pipeline & Automated Testing
+This project integrates automated testing via **GitHub Actions**. Upon every push or pull request to the `main` branch, the CI pipeline provisions an Ubuntu virtual environment, installs project dependencies, and executes unit and system tests via `pytest`.
+
+### Test Suite Overview
+* **Unit Tests (4 tests):**
+  * `test_load_data`: Verifies dataset presence, column schema, and DataFrame integrity.
+  * `test_preprocess_data_shapes`: Validates train/test split proportions (80/20) and target separation.
+  * `test_preprocess_data_edge_case`: Ensures empty DataFrames properly raise a `ValueError`.
+  * `test_train_and_evaluate_model`: Evaluates Linear Regression training bounds, verifying non-negative MSE and $0 \le R^2 \le 1$.
+* **System Test (1 test):**
+  * `test_entire_pipeline_system`: Runs an end-to-end execution of data loading, preprocessing, model training, metrics calculation, visualization generation, and Polars benchmarking.
+
+### Test Execution Results
+All 5 tests executed and passed successfully in the automated CI runner:
+
+![Test Results](test_results.png)
+
+---
+
 # Wine Quality Analysis — Series 1 (Week 1)
 
 ## Project Overview
