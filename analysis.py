@@ -125,12 +125,7 @@ def run_pipeline(csv_file_path: str = "Data/wine_quality_merged.csv"):
     speedup = pandas_time / polars_time
     print(f"Polars is {speedup:.2f}x faster than Pandas!")
 
-    return {
-        "model": model,
-        "mse": mse,
-        "r2": r2,
-        "speedup": speedup
-    }
+    return {"model": model, "mse": mse, "r2": r2, "speedup": speedup}
 
 
 if __name__ == "__main__":
