@@ -1,3 +1,35 @@
+
+## Docker Containerization & Reproducibility
+
+To ensure cross-platform reproducibility and eliminate dependency conflicts ("works on my machine" issues), the entire end-to-end wine quality analysis pipeline has been packaged into an isolated Docker container.
+
+### Architecture & Design Decisions
+- **Base Image:** Built on `python:3.10-slim` to provide an official, minimal Debian Linux operating environment with a low memory footprint.
+- **Dependency Caching:** Dependencies listed in `requirements.txt` are installed independently with `--no-cache-dir` before project code is copied to leverage Docker's layer-caching mechanism.
+- **Clean Image Scope:** A customized `.dockerignore` file prevents unneeded local artifacts (`__pycache__`, `.git`, `.pytest_cache`, image files) from polluting the container image.
+- **Automated Entrypoint:** The container defaults to running `CMD ["python", "analysis.py"]`, automatically executing data preprocessing, Polars vs. Pandas benchmarking, and Random Forest model training upon launch.
+
+### Reproduction Guide
+
+#### Step 1: Build the Docker Image
+```bash
+docker build -t wine-quality-pipeline .
+```
+
+#### Step 2: Execute the Containerized Pipeline
+```bash
+docker run --rm wine-quality-pipeline
+```
+
+#### Step 3: Inspect Local Images and Container State
+```bash
+# List built container images
+docker images
+
+# Inspect active and completed container executions
+docker ps -a
+```
+
 # Wine Quality Analysis — Series 2 (Week 2)
 
 [![CI Workflow](https://github.com/gulnargasimzada/Wine-quality-analysis/actions/workflows/ci.yml/badge.svg)](https://github.com/gulnargasimzada/Wine-quality-analysis/actions/workflows/ci.yml)
