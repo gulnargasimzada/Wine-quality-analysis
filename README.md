@@ -56,6 +56,24 @@ docker ps -a
   <img src="pep8_format_diff.png" alt="PEP 8 Formatting Diff" width="800"/>
 </p>
 
+## Key Findings & Project Refinements
+
+### Problem Statement & Domain Insights
+This project analyzes the physicochemical attributes determining wine quality scores, with a special focus on high-performance data processing using Polars versus Pandas.
+
+### Custom Enhancement: Alcohol Outlier Analysis Across Quality Ratings
+As an original domain enhancement, a boxplot distribution was implemented to inspect alcohol concentration variations and identify outliers across distinct wine quality scores:
+
+<p align="center">
+  <img src="alcohol_boxplot.png" alt="Alcohol Outlier Boxplot" width="750"/>
+</p>
+
+### Key Analytical Takeaways
+- **Alcohol Content Impact:** Higher quality wines (scores 7, 8, and 9) demonstrate consistently higher median alcohol percentages (~11.5% - 12.5%) compared to lower-rated wines (~9.5% - 10.0%).
+- **Outlier Observations:** Moderate quality tiers (scores 5 and 6) exhibit notable upper-bound outliers in alcohol content, indicating that alcohol alone is not the sole determinant of quality; acidity and chemical balance also play critical roles.
+- **Data Integrity:** Missing values were evaluated and confirmed at 0.00% across critical feature columns.
+- **Performance Benchmark:** Polars demonstrated substantial execution speedups over Pandas for grouped filtering and aggregations, highlighting its efficiency in data pipelines.
+
 # Wine Quality Analysis — Series 2 (Week 2)
 
 [![CI Workflow](https://github.com/gulnargasimzada/Wine-quality-analysis/actions/workflows/ci.yml/badge.svg)](https://github.com/gulnargasimzada/Wine-quality-analysis/actions/workflows/ci.yml)

@@ -66,6 +66,17 @@ def plot_quality_distribution(df: pd.DataFrame, save_path: str = None):
         plt.savefig(save_path)
     plt.close()
 
+def plot_alcohol_boxplot(df: pd.DataFrame, save_path: str = "alcohol_boxplot.png") -> None:
+    """Plot boxplot to detect alcohol outliers across quality ratings (Original Enhancement)."""
+    plt.figure(figsize=(8, 5))
+    sns.boxplot(data=df, x="quality", y="alcohol", palette="Set2")
+    plt.title("Alcohol Distribution & Outliers by Wine Quality")
+    plt.xlabel("Quality Rating")
+    plt.ylabel("Alcohol Content (%)")
+    plt.tight_layout()
+    if save_path:
+        plt.savefig(save_path)
+    plt.close()
 
 def plot_alcohol_vs_quality(df: pd.DataFrame, save_path: str = None):
     """Scatter plot of alcohol content vs quality score."""
@@ -124,6 +135,7 @@ def run_pipeline(csv_file_path: str = "Data/wine_quality_merged.csv"):
 
     plot_quality_distribution(df)
     plot_alcohol_vs_quality(df)
+    plot_alcohol_boxplot(df)
 
     pandas_time, _ = benchmark_pandas(csv_file_path)
     polars_time, _ = benchmark_polars(csv_file_path)
