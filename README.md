@@ -1,4 +1,4 @@
-
+# Wine Quality Analysis — Series 3 (Week 3)
 ## Docker Containerization & Reproducibility
 
 To ensure cross-platform reproducibility and eliminate dependency conflicts ("works on my machine" issues), the entire end-to-end wine quality analysis pipeline has been packaged into an isolated Docker container.
