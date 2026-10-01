@@ -29,6 +29,20 @@ docker images
 # Inspect active and completed container executions
 docker ps -a
 ```
+## Code Quality & PEP 8 Refactoring
+
+To ensure maintainability, readability, and adherence to industry-standard Python practices, the codebase was audited and refactored using static analysis and automated formatting tools:
+
+- **Linting (`flake8`):** Identified initial style violations including line-length constraints (`E501`) and missing end-of-file newlines (`W292`).
+- **Formatting (`black`):** Standardized formatting across the pipeline, structuring multi-line expressions and dictionaries to conform strictly to PEP 8.
+- **Verification:** Post-formatting audits with `flake8` verified zero remaining syntax, style, or linting errors.
+
+### Refactoring Verification (GitHub Diff)
+The commit diff below illustrates the automated refactoring applied to `analysis.py`:
+
+<p align="center">
+  <img src="code_refactor_diff.png" alt="PEP 8 Refactor Diff" width="800"/>
+</p>
 
 # Wine Quality Analysis — Series 2 (Week 2)
 
