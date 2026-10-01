@@ -13,6 +13,18 @@ def load_data(file_path: str) -> pd.DataFrame:
     return pd.read_csv(file_path)
 
 
+def explore_data(df: pd.DataFrame) -> None:
+    """Print dataset overview, summary statistics, and missing value distribution."""
+    print("--- Head (First 5 Rows) ---")
+    print(df.head())
+    print("\n--- Summary Statistics ---")
+    print(df.describe())
+    print("\n--- Missing Values Count ---")
+    print(df.isnull().sum())
+    missing_pct = (df.isnull().sum().sum() / df.size) * 100
+    print(f"\nTotal Missing Data Percentage: {missing_pct:.2f}%")
+
+
 def preprocess_data(df: pd.DataFrame):
     """Clean data, separate features and target, and split into train/test sets."""
     if df.empty:
@@ -100,12 +112,7 @@ def run_pipeline(csv_file_path: str = "Data/wine_quality_merged.csv"):
     """Execute the full analytical, modeling, and benchmarking pipeline."""
     df = load_data(csv_file_path)
 
-    print("--- Head (First 5 Rows) ---")
-    print(df.head())
-    print("\n--- Summary Statistics ---")
-    print(df.describe())
-    print("\n--- Missing Values ---")
-    print(df.isnull().sum())
+    explore_data(df)
 
     X_train, X_test, y_train, y_test = preprocess_data(df)
     model = train_model(X_train, y_train)
