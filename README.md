@@ -29,19 +29,31 @@ docker images
 # Inspect active and completed container executions
 docker ps -a
 ```
-## Code Quality & PEP 8 Refactoring
+## Code Quality & Refactoring
 
-To ensure maintainability, readability, and adherence to industry-standard Python practices, the codebase was audited and refactored using static analysis and automated formatting tools:
+### 1. What You Changed
+- **Modularized Exploratory Data Analysis (EDA):** Extracted inline data inspection logic (`head()`, `describe()`, and `isnull()`) from `run_pipeline` into a dedicated `explore_data(df: pd.DataFrame)` helper function with automated missing value calculation.
+- **Enforced PEP 8 & Formatting:** Standardized formatting, line lengths, and dictionary structures across `analysis.py` using `black` and verified zero remaining linting errors via `flake8`.
 
-- **Linting (`flake8`):** Identified initial style violations including line-length constraints (`E501`) and missing end-of-file newlines (`W292`).
-- **Formatting (`black`):** Standardized formatting across the pipeline, structuring multi-line expressions and dictionaries to conform strictly to PEP 8.
-- **Verification:** Post-formatting audits with `flake8` verified zero remaining syntax, style, or linting errors.
+### 2. Why You Changed It
+- **Separation of Concerns:** `run_pipeline` should orchestrate high-level execution rather than directly executing granular print diagnostics. Extracting `explore_data` improves modularity, testability, and code readability.
+- **Maintainability:** Adhering to PEP 8 standards ensures clean collaboration and avoids regressions.
 
-### Refactoring Verification (GitHub Diff)
-The commit diff below illustrates the automated refactoring applied to `analysis.py`:
+### 3. How Verification Was Performed
+- **Automated Unit & System Tests:** Ran test suite via `pytest` to confirm all assertions and data preprocessing steps remain fully functional.
+- **Linter Audits:** Verified cleanly with `flake8 --max-line-length=88 analysis.py` with zero reported errors.
+- **Docker Execution:** Successfully executed containerized pipeline runs inside Docker.
 
+### GitHub Refactoring Commit Diffs
+
+#### Meaningful Code Refactoring (Extract Function)
 <p align="center">
-  <img src="code_refactor_diff.png" alt="PEP 8 Refactor Diff" width="800"/>
+  <img src="code_refactor_diff.png" alt="Meaningful Refactor Diff" width="800"/>
+</p>
+
+#### PEP 8 Automated Formatting
+<p align="center">
+  <img src="pep8_format_diff.png" alt="PEP 8 Formatting Diff" width="800"/>
 </p>
 
 # Wine Quality Analysis — Series 2 (Week 2)
